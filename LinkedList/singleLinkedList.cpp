@@ -147,7 +147,7 @@ void List :: addLoop()
 int main()
 {
 	List list;
-    list.AddNodeFront(1);
+    	list.AddNodeFront(1);
 	list.AddNodeFront(2);
 	list.AddNodeFront(3);
 	list.AddNodeFront(4);
