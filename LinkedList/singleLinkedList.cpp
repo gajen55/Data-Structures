@@ -23,6 +23,7 @@ class List{
 	bool findLoop();
 	void reverseList();
 	void printList();
+	void addLoop();
 
 };
 
@@ -106,16 +107,18 @@ bool List :: findLoop()
 		slow = head;
 		fast = head;
 
-		while(slow!=NULL || fast->next!=NULL)
+		while(slow!=NULL && fast!=NULL && fast->next!=NULL)
 		{
 			slow = slow->next;
 			fast = fast->next->next;
 			if(slow==fast)
 			{
+				cout<<"Loop found"<<endl;
 				return true;
 			}
 		}
 	}
+	cout<<"Loop not found"<<endl;
 	return false;
 }
 
@@ -131,16 +134,29 @@ void List :: printList()
 	cout<<endl;
 }
 
+void List :: addLoop()
+{
+	Node *temp = head;
+	while(temp->next!=NULL)
+	{
+		temp = temp->next;
+	}
+	temp->next = head->next;
+}
+
 int main()
 {
 	List list;
-	list.AddNodeFront(1);
+    list.AddNodeFront(1);
 	list.AddNodeFront(2);
 	list.AddNodeFront(3);
 	list.AddNodeFront(4);
 	list.AddNodeFront(5);
 	list.printList();
-	list.deleteNode(3);
+	list.findLoop();
 	list.printList();
+	list.deleteNode(3);
+	list.addLoop();
+	list.findLoop();
 	return 0;
 }
