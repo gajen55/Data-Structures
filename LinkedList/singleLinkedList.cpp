@@ -144,14 +144,41 @@ void List :: addLoop()
 	temp->next = head->next;
 }
 
+void List :: reverseList()
+{
+	Node *prev, *cur, *Next;
+	if(head==NULL || head->next==NULL)
+	{
+		cout<<"No List or only single node exists\n";
+	}
+	else
+	{
+	    
+		prev = head;
+		cur = head->next;
+		head->next=NULL;
+		Next = cur;
+		while(Next!=NULL)
+		{
+			Next = Next->next;
+			cur->next = prev;
+			prev = cur;
+			cur = Next;
+		}
+		head = prev;
+	}
+}
+
 int main()
 {
 	List list;
-    	list.AddNodeFront(1);
+    list.AddNodeFront(1);
 	list.AddNodeFront(2);
 	list.AddNodeFront(3);
 	list.AddNodeFront(4);
 	list.AddNodeFront(5);
+	list.printList();
+	list.reverseList();
 	list.printList();
 	list.findLoop();
 	list.printList();
