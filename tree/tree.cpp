@@ -54,9 +54,30 @@ void Tree :: preOrder(Node *root)
 {
 	if(root!=NULL)
 	{
+		cout<<root->data<<" ";
 		preOrder(root->left);
-		cout<<root->data<<endl;
 		preOrder(root->right);
+	}
+
+}
+void Tree :: inOrder(Node *root)
+{
+	if(root!=NULL)
+	{
+		inOrder(root->left);
+		cout<<root->data<<" ";
+		inOrder(root->right);
+	}
+
+}
+
+void Tree :: postOrder(Node *root)
+{
+	if(root!=NULL)
+	{
+		postOrder(root->left);
+		postOrder(root->right);
+		cout<<root->data<<" ";
 	}
 
 }
@@ -64,13 +85,17 @@ void Tree :: preOrder(Node *root)
 int main()
 {
 	Tree tree;
-	tree.addNode(6,&(tree.root));
-	tree.addNode(5,&(tree.root));
-	tree.addNode(4,&(tree.root));
 	tree.addNode(3,&(tree.root));
 	tree.addNode(2,&(tree.root));
+	tree.addNode(1,&(tree.root));
+	tree.addNode(4,&(tree.root));
+	tree.addNode(5,&(tree.root));
+	cout<<"pre Order: ";
 	tree.preOrder(tree.root);
+	cout<<endl<<"in order: ";
+	tree.inOrder(tree.root);
+	cout<<endl<<"post order: ";
+	tree.postOrder(tree.root);
 
 	return 0;
 }
-
