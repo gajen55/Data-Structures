@@ -153,6 +153,8 @@ Node * Tree :: deleteNode(int a, Node *node)
 	}
 	else
 	{
+	    /* deleting Node having no child or single child. 
+	    delete node and join it's parent with it's parent's grandchild ;) */
 		if(node->left==NULL)
 		{
 			Node * temp = node->right;
@@ -165,6 +167,8 @@ Node * Tree :: deleteNode(int a, Node *node)
 			delete node;
 			return temp;
 		}
+		/* Deleting node having 2 child nodes. replace node with the smallest node in right subtree. 
+		Then delete the duplicate node recursively */
 		else
 		{
 			Node *temp = findMinNode(node->right);
