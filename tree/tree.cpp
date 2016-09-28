@@ -3,27 +3,44 @@
 
 using namespace std;
 
-typedef struct Node{
+typedef struct Node
+{
 	int data;
 	Node *left;
 	Node *right;
 } Node;
 
-class Tree{
-
-	public:
+class Tree
+{
 	Node *root;
-	Tree()
-	{
-		root = NULL;
-	};
 	void addNode(int a, Node **cur);
 	void preOrder(Node *node);
 	void inOrder(Node *node);
 	void postOrder(Node *node);
+	void deleteTree(Node *node);
 	Node * deleteNode(int a, Node *node);
 	Node * findMinNode(Node *node);
+	
+	public:
+	Tree()
+	{
+		root = NULL;
+	};
+	void addNode(int a);
+	void preOrder();
+	void inOrder();
+	void postOrder();
+	Node * deleteNode(int a);
+	~Tree()
+	{
+	    deleteTree(root);
+	}
 };
+
+void Tree :: addNode(int a)
+{
+    addNode(a,&root);
+}
 
 void Tree :: addNode(int a, Node **cur)
 {
@@ -48,6 +65,11 @@ void Tree :: addNode(int a, Node **cur)
 	}
 }
 
+void Tree :: preOrder()
+{
+    preOrder(root);
+}
+
 void Tree :: preOrder(Node *root)
 {
 	if(root!=NULL)
@@ -57,6 +79,12 @@ void Tree :: preOrder(Node *root)
 		preOrder(root->right);
 	}
 }
+
+void Tree :: inOrder()
+{
+    inOrder(root);
+}
+
 void Tree :: inOrder(Node *root)
 {
 	if(root!=NULL)
@@ -65,6 +93,11 @@ void Tree :: inOrder(Node *root)
 		cout<<root->data<<" ";
 		inOrder(root->right);
 	}
+}
+
+void Tree :: postOrder()
+{
+    postOrder(root);
 }
 
 void Tree :: postOrder(Node *root)
@@ -77,6 +110,16 @@ void Tree :: postOrder(Node *root)
 	}
 }
 
+void Tree :: deleteTree(Node *node)
+{
+    if(node!=NULL)
+    {
+        deleteTree(node->left);
+        deleteTree(node->right);
+        cout<<node->data<<" is deleted"<<endl;
+        delete node;
+    }
+}
 Node * Tree :: findMinNode(Node *node)
 {
 	if(node->left==NULL)
@@ -87,6 +130,11 @@ Node * Tree :: findMinNode(Node *node)
 	{
 		return findMinNode(node->left);
 	}
+}
+
+Node * Tree :: deleteNode(int a)
+{
+    deleteNode(a, root);
 }
 
 Node * Tree :: deleteNode(int a, Node *node)
@@ -130,28 +178,28 @@ Node * Tree :: deleteNode(int a, Node *node)
 int main()
 {
 	Tree tree;
-	tree.addNode(5,&(tree.root));
-	tree.addNode(2,&(tree.root));
-	tree.addNode(-4,&(tree.root));
-	tree.addNode(3,&(tree.root));
+	tree.addNode(5);
+	tree.addNode(2);
+	tree.addNode(-4);
+	tree.addNode(3);
 
-	tree.addNode(12,&(tree.root));
-	tree.addNode(9,&(tree.root));
-	tree.addNode(21,&(tree.root));
-	tree.addNode(19,&(tree.root));
-	tree.addNode(25,&(tree.root));
+	tree.addNode(12);
+	tree.addNode(9);
+	tree.addNode(21);
+	tree.addNode(19);
+	tree.addNode(25);
 	cout<<"pre Order: ";
-	tree.preOrder(tree.root);
+	tree.preOrder();
 	cout<<endl;
-	tree.deleteNode(12,tree.root);
+	tree.deleteNode(12);
 	cout<<"pre Order: ";
-	tree.preOrder(tree.root);
+	tree.preOrder();
 	cout<<endl;
 	cout<<"in order: ";
-	tree.inOrder(tree.root);
+	tree.inOrder();
 	cout<<endl;
 	cout<<"post order: ";
-	tree.postOrder(tree.root);
+	tree.postOrder();
 	cout<<endl;
 
 	return 0;
