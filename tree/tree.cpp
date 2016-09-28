@@ -12,14 +12,11 @@ typedef struct Node{
 class Tree{
 
 	public:
-
 	Node *root;
-
 	Tree()
 	{
 		root = NULL;
 	};
-
 	void addNode(int a, Node **cur);
 	void preOrder(Node *node);
 	void inOrder(Node *node);
@@ -59,7 +56,6 @@ void Tree :: preOrder(Node *root)
 		preOrder(root->left);
 		preOrder(root->right);
 	}
-
 }
 void Tree :: inOrder(Node *root)
 {
@@ -69,7 +65,6 @@ void Tree :: inOrder(Node *root)
 		cout<<root->data<<" ";
 		inOrder(root->right);
 	}
-
 }
 
 void Tree :: postOrder(Node *root)
@@ -80,7 +75,6 @@ void Tree :: postOrder(Node *root)
 		postOrder(root->right);
 		cout<<root->data<<" ";
 	}
-
 }
 
 Node * Tree :: findMinNode(Node *node)
@@ -148,13 +142,17 @@ int main()
 	tree.addNode(25,&(tree.root));
 	cout<<"pre Order: ";
 	tree.preOrder(tree.root);
+	cout<<endl;
 	tree.deleteNode(12,tree.root);
 	cout<<"pre Order: ";
 	tree.preOrder(tree.root);
-	cout<<endl<<"in order: ";
+	cout<<endl;
+	cout<<"in order: ";
 	tree.inOrder(tree.root);
-	cout<<endl<<"post order: ";
+	cout<<endl;
+	cout<<"post order: ";
 	tree.postOrder(tree.root);
+	cout<<endl;
 
 	return 0;
 }
