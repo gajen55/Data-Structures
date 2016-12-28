@@ -6,39 +6,61 @@ struct MinBinaryHeap
 	vector <int> key;
 	int n;
 	
+	MinBinaryHeap()
+	{
+		n=0;
+	}
 	void insert(int a)
 	{
 		key.push_back(a);
 		n++;
-		swim(n-1);
+		swim(n);
 	}
 	
 	int remove()
 	{
 		int max = key[0];
-		swap(key[0], key[key.size()-1]);
-		key.pop_back;
+		swap(key[0], key[n-1]);
+		key.pop_back();
 		n--;
-		sink(0);
+		sink(1);
 		return max;
 	}
 	
-	void swim(int N)
+	void swim(int k)
 	{
-		int parent = 2N;
-		while(parent>=0)
+		int parent = k/2;
+		while(parent>=1)
 		{
-			if(key[parent]>key[N])
+			if(key[parent-1]<key[k-1])
 			{
-				swap(key[parent], key[N])
+				swap(key[parent-1], key[k-1]);
 			}
-			parent = 2N;
+			k = parent;
+			parent = k/2;
 		}
 	}
 	
-	void sink(int N)
+	void sink(int k)
 	{
-		
+		int child;
+		while(2*k<=n-1)
+		{
+			if(2*k == n-1)
+			{
+				child = 2*k;
+			}
+			else
+			{
+				if(key[2*k-1] < key[2*k])
+					child = 2*k;
+				else
+					child = 2*k+1;
+			}
+			if(key[k-1]>key[child-1])
+			    swap(key[k-1],key[child-1]);
+			k = child;
+		}
 	}
 	
 	void swap(int &a, int &b)
@@ -48,4 +70,19 @@ struct MinBinaryHeap
 		b = temp;
 	}
 	
+};
+
+int main()
+{
+	MinBinaryHeap mbh;
+	mbh.insert(8);
+	mbh.insert(2);
+	mbh.insert(3);
+
+	mbh.insert(7);
+	mbh.insert(4);
+	mbh.insert(5);
+	
+	
+	cout<<mbh.remove();
 }
