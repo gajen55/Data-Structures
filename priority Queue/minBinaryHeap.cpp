@@ -39,9 +39,9 @@ class MinBinaryHeap
 	    return (n?false:true);
 	}
 	private:
-	void swim(item k)
+	void swim(int k)
 	{
-		item parent = k/2;
+		int parent = k/2;
 		while(parent>=1)
 		{
 			if(key[parent-1]>key[k-1])
@@ -53,7 +53,7 @@ class MinBinaryHeap
 		}
 	}
 	
-	void sink(item k)
+	void sink(int k)
 	{
 		int child;
 		while(2*k<=n-1)
@@ -86,13 +86,10 @@ class MinBinaryHeap
 
 int main()
 {
-	MinBinaryHeap <long> mbh;
-	mbh.push(1);
-	mbh.push(2);
+	MinBinaryHeap <int> mbh;
 	mbh.push(3);
-	mbh.push(7);
-	mbh.push(4);
-	mbh.push(5);
+	mbh.push(1);
+
 
 	cout<<mbh.pop();
 }
