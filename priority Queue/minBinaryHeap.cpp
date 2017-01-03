@@ -13,6 +13,11 @@ class MinBinaryHeap
 		n=0;
 	}
 	
+	item top()
+	{
+	    return key[0];
+	}
+	
 	void push(item a)
 	{
 		key.push_back(a);
