@@ -1,43 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct MinBinaryHeap
+template <class item>
+class MinBinaryHeap
 {
-	vector <int> key;
+	vector <item> key;
 	int n;
 	
+	public:
 	MinBinaryHeap()
 	{
 		n=0;
 	}
 	
-	void printer()
-	{
-	    for(int i=0; i<key.size(); i++)
-	    {
-	        cout<<key[i]<<endl;
-	    }
-	}
-	void insert(int a)
+	void push(item a)
 	{
 		key.push_back(a);
 		n++;
 		swim(n);
 	}
 	
-	int remove()
+	item pop()
 	{
-		int max = key[0];
+		item max = key[0];
 		swap(key[0], key[n-1]);
 		key.pop_back();
 		n--;
 		sink(1);
 		return max;
 	}
-	
-	void swim(int k)
+	int size()
 	{
-		int parent = k/2;
+	    return n;
+	}
+	
+	bool empty()
+	{
+	    return (n?false:true);
+	}
+	private:
+	void swim(item k)
+	{
+		item parent = k/2;
 		while(parent>=1)
 		{
 			if(key[parent-1]>key[k-1])
@@ -49,7 +53,7 @@ struct MinBinaryHeap
 		}
 	}
 	
-	void sink(int k)
+	void sink(item k)
 	{
 		int child;
 		while(2*k<=n-1)
@@ -71,9 +75,9 @@ struct MinBinaryHeap
 		}
 	}
 	
-	void swap(int &a, int &b)
+	void swap(item &a, item &b)
 	{
-		int temp = a;
+		item temp = a;
 		a = b;
 		b = temp;
 	}
@@ -82,15 +86,13 @@ struct MinBinaryHeap
 
 int main()
 {
-	MinBinaryHeap mbh;
-	mbh.insert(1);
-	mbh.insert(2);
-	mbh.insert(3);
+	MinBinaryHeap <long> mbh;
+	mbh.push(1);
+	mbh.push(2);
+	mbh.push(3);
+	mbh.push(7);
+	mbh.push(4);
+	mbh.push(5);
 
-	mbh.insert(7);
-	mbh.insert(4);
-	mbh.insert(5);
-	
-	//mbh.printer();
-	cout<<mbh.remove();
+	cout<<mbh.pop();
 }
