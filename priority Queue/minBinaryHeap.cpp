@@ -10,6 +10,14 @@ struct MinBinaryHeap
 	{
 		n=0;
 	}
+	
+	void printer()
+	{
+	    for(int i=0; i<key.size(); i++)
+	    {
+	        cout<<key[i]<<endl;
+	    }
+	}
 	void insert(int a)
 	{
 		key.push_back(a);
@@ -32,7 +40,7 @@ struct MinBinaryHeap
 		int parent = k/2;
 		while(parent>=1)
 		{
-			if(key[parent-1]<key[k-1])
+			if(key[parent-1]>key[k-1])
 			{
 				swap(key[parent-1], key[k-1]);
 			}
@@ -75,7 +83,7 @@ struct MinBinaryHeap
 int main()
 {
 	MinBinaryHeap mbh;
-	mbh.insert(8);
+	mbh.insert(1);
 	mbh.insert(2);
 	mbh.insert(3);
 
@@ -83,6 +91,6 @@ int main()
 	mbh.insert(4);
 	mbh.insert(5);
 	
-	
+	//mbh.printer();
 	cout<<mbh.remove();
 }
